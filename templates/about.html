@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Dr. lappie</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            font-family: 'Raleway', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(to right, #ff69b4, #ff00ff);
+ /* Purple to white */
+            color: #333; /* Dark text for contrast */
+        }
+
+        .container {
+            //text-align: center;
+            max-width: 600px;
+            width: 90%;
+            background-color: rgba(255, 255, 255, 0.85);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #6b21a8; /* Dark purple */
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: #4b5563;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        ul li a {
+            --fill-color: #9333ea;
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-decoration: none;
+            text-transform: uppercase;
+            background: linear-gradient(var(--fill-color) 0 100%) left / 0 no-repeat;
+            //color: transparent;
+            -webkit-text-stroke: 1px var(--fill-color);
+            background-clip: text;
+            transition: background-size 0.4s ease;
+        }
+
+        ul li a:hover {
+            color: transparent;
+            background-size: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>
+            apa itu Dr. lappie
+        </h2>
+        <p>
+            Dr. lappie adalah website sistem pakar yang berfungsi sebagai pendeteksi kerusakan laptop bedasarkan keluhan pengguna  
+
+            <br>
+            di desain dan dikembangkan oleh <a href="https://www.linkedin.com/in/mahesa-putra-036528284/" target="_blank" rel="noopener noreferrer">Mahesa Putra Pinuntun</a>
+            <br>
+            sejak 20 februari 2025
+            
+        </p>
+        <h4>
+            <a href="{{ url_for('dashboard') }}" rel="noopener noreferrer">Kembali ke Dashboard Menu
+
+            </a>
+        </h4>
+        
+    </div>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <script>
+          alert("{{ messages[0] }}");
+        </script>
+      {% endif %}
+    {% endwith %}
+
+</body>
+</html>
+

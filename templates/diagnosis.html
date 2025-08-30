@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dr.Lappie</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f3f4f6;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
+
+    .container {
+      background: #fff;
+      margin: 2rem auto;
+      padding: 2rem 2.5rem;
+      border-radius: 12px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      max-width: 700px;
+      width: 100%;
+    }
+
+    h2 {
+      text-align: center;
+      color: #1f2937;
+      margin-bottom: 1rem;
+    }
+
+    form h3 {
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+      color: #111827;
+    }
+
+    /* Scrollable section for symptoms */
+    .symptom-list {
+      max-height: 60vh;
+      overflow-y: auto;
+      margin-bottom: 1rem;
+      border: 1px solid #e5e7eb;
+      padding: 1rem;
+      border-radius: 8px;
+      background: #f9fafb;
+    }
+
+    .symptom-row {
+      position: relative;
+      margin-bottom: 8px;
+    }
+    .symptom-row input[type="checkbox"] {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .symptom-row label {
+      display: block;
+      padding: 10px 15px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.2s, border-color 0.2s;
+      color: #374151;
+      user-select: none;
+    }
+    .symptom-row label:hover {
+      background-color: #f0f9ff;
+      border-color: #a5d8ff;
+    }
+    .symptom-row input[type="checkbox"]:checked + label {
+      background-color: #2563eb;
+      border-color: #1e40af;
+      color: #fff;
+    }
+
+    input[type="submit"] {
+      margin-top: 1rem;
+      background-color: #2563eb;
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      font-size: 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    a.back-link {
+      display: block;
+      text-align: center;
+      margin-top: 1.5rem;
+      color: #2563eb;
+      text-decoration: none;
+    }
+
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+    .modal-content {
+      background-color: #fff;
+      margin: 10% auto;
+      padding: 2rem;
+      border-radius: 8px;
+      width: 80%; max-width: 500px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      text-align: center;
+      position: relative;
+    }
+    .modal-content .close {
+      color: #aaa;
+      position: absolute;
+      right: 1rem; top: 0.5rem;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .modal-content .close:hover {
+      color: #000;
+    }
+    .modal-content button {
+      margin-top: 1rem;
+      background-color: #10b981;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .modal-content #steptofix {
+      margin-top: 1rem;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Cari tahu disini</h2>
+    <form method="POST" id="diagnosis-form">
+      <h3>Pilih Gejala:</h3>
+      <div class="symptom-list">
+        {% for gejala in gejala_list %}
+          <div class="symptom-row">
+            <input type="checkbox"
+                   id="g-{{ gejala.kode_gejala }}"
+                   name="gejala"
+                   value="{{ gejala.kode_gejala }}"
+                   {% if gejala.kode_gejala in selected_gejala %}checked{% endif %}>
+            <label for="g-{{ gejala.kode_gejala }}">
+              {{ gejala.kode_gejala }} – {{ gejala.nama_gejala }}
+            </label>
+          </div>
+        {% endfor %}
+      </div>
+      <input type="submit" value="Diagnose">
+    </form>
+    <a href="{{ url_for('dashboard') }}" class="back-link">← Back to Dashboard</a>
+  </div>
+
+  {% if result %}
+  <div id="resultModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h3>Diagnosis Result</h3>
+      <p>{{ result }}</p>
+      <button type="button" onclick="askfix('{{ result.split(' - ')[0] }}')">How to fix</button>
+      <div id="steptofix"></div>
+    </div>
+  </div>
+  {% endif %}
+
+  <script>
+    function askfix(kodeKerusakan) {
+      fetch(`/get_steps/${kodeKerusakan}`)
+        .then(res => res.json())
+        .then(data => {
+          const div = document.getElementById("steptofix");
+          if (!data.steps.length) {
+            div.innerHTML = "<p>No fix steps found.</p>";
+          } else {
+            div.innerHTML = "<h4>How to Fix:</h4><ol>" +
+              data.steps.map(s => `<li>${s}</li>`).join('') +
+              "</ol>";
+          }
+        })
+        .catch(err => console.error("Error fetching steps:", err));
+    }
+    function closeModal() {
+      document.getElementById("resultModal").style.display = "none";
+    }
+    window.onload = function() {
+      const m = document.getElementById("resultModal");
+      if (m) m.style.display = "block";
+    };
+    window.onclick = function(e) {
+      const m = document.getElementById("resultModal");
+      if (e.target === m) m.style.display = "none";
+    };
+  </script>
+</body>
+</html>

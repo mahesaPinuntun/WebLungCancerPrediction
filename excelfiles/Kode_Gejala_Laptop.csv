@@ -1,0 +1,42 @@
+kode_gejala,nama_gejala
+B01,Tombol hidup tapi tidak ada gambar tertampil di monitor
+B02,Terdapat garis horisontal/vertikal ditengah monitor
+B03,Tidak ada tampilan awal bios
+B04,Muncul Pesan eror pada bios (isi pesan selalu berbeda tergantung pada kondisi tertentu)
+B05,Alarm bios berbunyi
+B06,Terdengar suara aneh pada HDD
+B07,Sering terjadi hang/crash saat menjalankan aplikasi
+B08,Selalu Scandisk ketika booting
+B09,Muncul pesan error saat menjalankan game atau aplikasi gratis
+B10,"Device driver informasi tidak terdeteksi dalam device manager,meski driver telah di install"
+B11,Tiba-tiba OS melakukan restart otomatis
+B12,Keluarnya blue screen pada OS Windows (isi pesan selalu berbeda tergantung pada kondisi tertentu)
+B13,Suara tetap tidak keluar meskipun driver dan setting device telah dilakukan sesuai petunjuk
+B14,Muncul pesan error saat menjalankan aplikasi audio
+B15,Muncul pesan error saat pertama OS di load dari HDD
+B16,Tidak ada tanda-tanda dari sebagain/seluruh perangkat bekerja (semua kipas pendingin tidak berputar)
+B17,Sering tiba-tiba mati tanpa sebab
+B18,"Muncul pesan pada windows, bahwa windows kekurangan virtual memori"
+B19,"Aplikasi berjalan dengan lambat, respon yang lambat terhadap inputan"
+B20,Kinerja grafis terasa sangat berat (biasanya dalam game dan manipulasi gambar)
+B21,Device tidak terdeteksi dalam bios
+B22,Informasi deteksi yang salah dalam bios
+B23,Hanya sebagaian perangkat yang bekerja
+B24,Sebagain/seluruh karekter inputan mati
+B25,Pointer mouse tidak merespon gerakan mouse
+B26,"Tampak blok hitam, dan gambar tidak simetris/ acak"
+B27,Keluar bunyi beep panjang pada saat laptop dinyalakan
+B28,Di hidupkan agak sulit
+B29,Baterai tidak mau di charge
+B30,Tidak ada indikasi masuk power
+B31,Mati total
+B32,Laptop di charge posisi hidup kemudian tiba-tiba mati layar
+B33,Keluar beep berulang -ulang kali
+B34,Belum sampai windows sudah restart lagi
+B35,Laptop tiba‑tiba mati saat digunakan
+B36,Suara kipas berputar sangat keras dan panas berlebih
+B37,Beberapa tombol keyboard tidak merespons
+B38,Touchpad tidak berfungsi atau kursor melompat‑lompat
+B39,Modul Wi‑Fi tidak dapat terhubung ke jaringan
+B40,Baterai tidak mengisi meski adaptor terpasang
+

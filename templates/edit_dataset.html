@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Dataset</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f4f4f4;
+      padding: 2rem;
+    }
+    h1, h2 {
+      color: #333;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 2rem;
+    }
+    th, td {
+      padding: 10px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+    th {
+      background: #e2e8f0;
+      font-weight: bold;
+    }
+    tr:nth-child(even) {
+      background: #f9fafb;
+    }
+    .save-btn, .add-col-btn {
+      background-color: #2563eb;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+    .save-btn:hover, .add-col-btn:hover {
+      background-color: #1d4ed8;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Edit Dataset</h1>
+
+  <form method="POST" enctype="multipart/form-data">
+    <label for="file">Upload CSV:</label>
+    <input type="file" name="file" accept=".csv" required>
+    <button type="submit">Upload</button>
+  </form>
+
+  <br>
+  <a href="{{ url_for('dashboard') }}">← Back to Dashboard</a>
+
+  {% macro render_editable_table(title, data, dataset) %}
+    {% if data|length > 1 %}
+      <h2>{{ title }}</h2>
+      <button type="button" class="add-col-btn" onclick="addRow('{{ dataset }}')">Add R</button>
+      <table id="{{ dataset }}-table">
+        <tr>
+          {% for col in data[0] %}
+            <th>{{ col }}</th>
+          {% endfor %}
+          <th>Action</th>
+        </tr>
+        {% for row in data[1:] %}
+          <tr>
+            <form method="POST" action="{{ url_for('update_row') }}">
+              {% for cell in row %}
+                <td>
+                  <input 
+                    type="text" 
+                    name="col{{ loop.index0 }}" 
+                    value="{{ cell }}" 
+                    style="width:100%; box-sizing:border-box;">
+                </td>
+              {% endfor %}
+
+              <td>
+                <input type="hidden" name="dataset" value="{{ dataset }}">
+                <input type="hidden" name="id" value="{{ row[0] }}">
+                <button type="submit" class="save-btn">Save</button>
+              </td>
+            </form>
+          </tr>
+        {% endfor %}
+      </table>
+    {% endif %}
+  {% endmacro %}
+
+  {{ render_editable_table("Kode Gejala Laptop", gejala, "gejala") }}
+  {{ render_editable_table("Kode Kerusakan Laptop", kerusakan, "kerusakan") }}
+  {{ render_editable_table("Kode Perbaikan Laptop", perbaikan, "perbaikan") }}
+  {{ render_editable_table("Rule Kerusakan", rule_kerusakan, "rule_kerusakan") }}
+  {{ render_editable_table("Rule Perbaikan", rule_perbaikan, "rule_perbaikan") }}
+
+  <script>
+    // Prompt for new column and notify server
+    
+    // Existing update and modal functions remain unchanged
+    function askfix(kodeKerusakan) {
+      fetch(`/get_steps/${kodeKerusakan}`)
+        .then(res => res.json())
+        .then(data => {
+          const div = document.getElementById("steptofix");
+          if (!data.steps.length) {
+            div.innerHTML = "<p>No fix steps found.</p>";
+          } else {
+            div.innerHTML = "<h4>How to Fix:</h4><ol>" +
+              data.steps.map(s => `<li>${s}</li>`).join('') +
+              "</ol>";
+          }
+        })
+        .catch(err => console.error("Error fetching steps:", err));
+    }
+    function closeModal() {
+      document.getElementById("resultModal").style.display = "none";
+    }
+    window.onload = function() {
+      const m = document.getElementById("resultModal");
+      if (m) m.style.display = "block";
+    };
+    window.onclick = function(e) {
+      const m = document.getElementById("resultModal");
+      if (e.target === m) m.style.display = "none";
+    };
+    function addColumn(dataset) {
+      const table = document.getElementById(dataset + '-table');
+      const header = table.querySelector('tr');
+      // Add new header cell before 'Action'
+      const newTh = document.createElement('th');
+      newTh.innerText = 'New Column';
+      header.insertBefore(newTh, header.lastElementChild);
+
+      // Add new cell with input for each data row
+      const rows = table.querySelectorAll('tr');
+      rows.forEach((row, idx) => {
+        if (idx === 0) return; // skip header
+        const lastCell = row.lastElementChild;
+        const newTd = document.createElement('td');
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.name = 'col' + (row.querySelectorAll('td').length);
+        input.style.width = '100%';
+        input.style.boxSizing = 'border-box';
+        newTd.appendChild(input);
+        row.insertBefore(newTd, lastCell);
+      });
+    }
+    function addRow(dataset) {
+      // 1) grab table and header row
+      const table  = document.getElementById(`${dataset}-table`);
+      const header = table.querySelector('tr');
+      const ths    = header.querySelectorAll('th');
+
+      // 2) build the form and its new tr
+      const form = document.createElement('form');
+      form.method = 'POST';
+      form.action = '{{ url_for("add_row") }}';  // or hard‐code '/add-row'
+      form.className = 'row-form';               // display: contents
+
+      const tr = document.createElement('tr');
+      form.appendChild(tr);
+
+      // 3) for each header except the last (Action), add a blank input cell
+      ths.forEach((_, idx) => {
+        if (idx === ths.length - 1) return;  // skip Action col
+        const td = document.createElement('td');
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.name = `col${idx}`;
+        input.style.width = '100%';
+        td.appendChild(input);
+        tr.appendChild(td);
+      });
+
+      // 4) create the action cell
+      const actionTd = document.createElement('td');
+      // hidden dataset field
+      const ds = document.createElement('input');
+      ds.type = 'hidden';
+      ds.name = 'dataset';
+      ds.value = dataset;
+      actionTd.appendChild(ds);
+      // save button
+      const btn = document.createElement('button');
+      btn.type = 'submit';
+      btn.textContent = 'Save';
+      btn.className = 'save-btn';
+      actionTd.appendChild(btn);
+      tr.appendChild(actionTd);
+
+      // 5) append the form (and its row) to the table
+      table.appendChild(form);
+    }
+  </script>
+
+
+</body>
+</html>

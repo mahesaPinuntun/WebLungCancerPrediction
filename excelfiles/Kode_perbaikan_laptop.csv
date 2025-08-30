@@ -1,0 +1,26 @@
+Kode_perbaikan,langkah_perbaikan
+C_01,Matikan laptop; Periksa kabel monitor; Coba dengan monitor eksternal; Ganti monitor jika tidak berfungsi
+C_02,Matikan laptop; Cabut RAM; Bersihkan pin RAM; Pasang kembali RAM; Coba ganti dengan RAM lain
+C_03,Matikan laptop; Lepaskan HDD; Cek dengan komputer lain; Backup data; Ganti HDD jika rusak
+C_04,Update driver VGA; Bersihkan kipas GPU; Cek suhu GPU; Ganti VGA jika masih rusak
+C_05,Periksa volume & mute; Update driver sound; Coba speaker eksternal; Ganti sound card jika perlu
+C_06,Boot safe mode; Jalankan System Restore; Penanganan malware; Install ulang OS jika perlu
+C_07,Uninstall aplikasi bermasalah; Bersihkan registry; Install ulang aplikasi; Update versi terbaru
+C_08,Matikan laptop; Periksa kabel power supply; Ganti adapter jika rusak
+C_09,Bersihkan heatsink prosesor; Ganti pasta termal; Cek suhu CPU; Ganti prosesor jika overheat
+C_10,Periksa alokasi RAM; Tutup aplikasi background; Tambahkan modul RAM
+C_11,Periksa VRAM di BIOS; Upgrade VGA jika perlu
+C_12,Cek clock speed CPU; Upgrade prosesor sesuai motherboard
+C_13,Matikan laptop; Ganti kabel IDE
+C_14,Periksa daya output PSU; Ganti PSU jika tidak stabil
+C_15,Cek port USB; Coba perangkat USB lain; Ganti USB controller jika perlu
+C_16,Bersihkan keyboard; Ganti switch yang rusak; Ganti keyboard jika perlu
+C_17,Bersihkan mouse sensor; Ganti mouse jika tidak merespons
+C_18,Periksa regulator motherboard; Ganti IC regulator jika rusak
+C_19,Ganti charger; Periksa voltage output
+C_20,Periksa sambungan SATA; Test dengan HDD lain; Ganti HDD jika rusak
+C_21,Periksa output PSU; Ganti PSU jika perlu
+C_22,Kalibrasi baterai; Ganti baterai jika tidak mengisi
+C_23,Periksa retakan layar; Ganti panel LCD
+C_24,Keringkan keyboard; Ganti keyboard kalau korosi
+C_25,Bersihkan touchpad; Ganti modul touchpad jika perlu
