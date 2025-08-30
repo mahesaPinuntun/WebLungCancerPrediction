@@ -138,20 +138,13 @@ def register():
         finally:
             cur.close()
             conn.close()
-    ua = request.headers.get('User-Agent', '').lower()
-    if 'android' in ua or"iphone" in ua or "ipad" in ua or "ipod" in ua:
-        # redirect to the special android login route
-        return render_template('smartphoneregister.html')
-    
-    return render_template('login.html')
+
+    return render_template('register.html')
 
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        
-    # server-side check for Android
-       
         username = request.form['username']
         pw = request.form['pw']
 
@@ -168,11 +161,7 @@ def login():
             flash('Login successful.', 'success')
             return redirect(url_for('dashboard'))
         flash('Invalid credentials.', 'danger')
-    ua = request.headers.get('User-Agent', '').lower()
-    if 'android' in ua or"iphone" in ua or "ipad" in ua or "ipod" in ua:
-        # redirect to the special android login route
-        return render_template('smartphonelogin.html')
-    
+
     return render_template('login.html')
 
 
@@ -182,13 +171,6 @@ def dashboard():
         flash('Please log in first.', 'warning')
         return redirect(url_for('login'))
     return render_template('dashboard.html', username=session['username'])
-@app.route('/about')
-def about():
-    #if 'username' not in session:
-        #flash('Please log in first.', 'warning')
-        #return redirect(url_for('login'))
-    return render_template('about.html', username=session['username'])
-
 
 
 @app.route('/logout')
@@ -445,11 +427,9 @@ def cekpotensikangker():
     return render_template("cekpotensikangker.html", questions=questions, prediction=prediction)
 
 
-#if __name__ == '__main__':
-    #app.run(debug=False)
+if __name__ == '__main__':
+    app.run(debug=False)
 
 import os
-#port = int(os.environ.get("PORT", 5000))
-port = 5000
-print(port)
+port = int(os.environ.get("PORT", 5000))
 app.run(host="0.0.0.0", port=port)
