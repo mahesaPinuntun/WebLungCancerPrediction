@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,8 +17,9 @@
             align-items: center;
             justify-content: center;
             background: linear-gradient(to right, #ff69b4, #ff00ff);
- /* Purple to white */
-            color: #333; /* Dark text for contrast */
+            /* Purple to white */
+            color: #333;
+            /* Dark text for contrast */
         }
 
         .container {
@@ -33,7 +35,8 @@
         h2 {
             font-size: 2.5rem;
             margin-bottom: 10px;
-            color: #6b21a8; /* Dark purple */
+            color: #6b21a8;
+            /* Dark purple */
         }
 
         p {
@@ -69,37 +72,144 @@
             color: transparent;
             background-size: 100%;
         }
+
+        @import url('https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css');
+
+        body {
+            background: #d0dbe1;
+            padding: 2rem;
+        }
+
+        .grid-container {
+            width: min(75rem, 100%);
+            margin-inline: auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(20rem, 100%), 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            --grad: red, blue;
+            padding: 2.5rem;
+            background-image: linear-gradient(to bottom left, #e0e4e5, #f2f6f9);
+            border-radius: 2rem;
+            gap: 1.5rem;
+            display: grid;
+            grid-template: 'title icon' 'content content' 'bar bar' / 1fr auto;
+            font-family: system-ui, sans-serif;
+            color: #444447;
+            box-shadow:
+                inset -2px 2px hsl(0 0 100% / 1),
+                -20px 20px 40px hsl(0 0 0 / .25);
+
+            .title {
+                font-size: 1.5rem;
+                grid-area: title;
+                align-self: end;
+                text-transform: uppercase;
+                font-weight: 500;
+                word-break: break-all;
+
+            }
+
+            .icon {
+                grid-area: icon;
+                font-size: 3rem;
+
+                >i {
+                    color: transparent;
+                    background: linear-gradient(to right, var(--grad));
+                    background-clip: text;
+                }
+            }
+
+            .content {
+                grid-area: content;
+
+                &>*:first-child {
+                    margin-top: 0rem
+                }
+
+                &>*:last-child {
+                    margin-bottom: 0rem
+                }
+            }
+
+            &::after {
+                content: "";
+                grid-area: bar;
+                height: 2px;
+                background-image: linear-gradient(90deg, var(--grad));
+                /*     margin-inline: -1.5rem; */
+            }
+        }
     </style>
 </head>
+
 <body>
     <div class="container">
         <h2>
             apa itu Dr. lappie
         </h2>
         <p>
-            Dr. lappie adalah website sistem pakar yang berfungsi sebagai pendeteksi kerusakan laptop bedasarkan keluhan pengguna  
+            Dr. lunggie adalah website pendeteksi potensi kangker paru-paru menggunakan AI model yang telah dilatih
 
             <br>
-            di desain dan dikembangkan oleh <a href="https://www.linkedin.com/in/mahesa-putra-036528284/" target="_blank" rel="noopener noreferrer">Mahesa Putra Pinuntun</a>
+            di desain dan dikembangkan oleh <a href="https://www.linkedin.com/in/mahesa-putra-036528284/"
+                target="_blank" rel="noopener noreferrer">Mahesa Putra Pinuntun</a>
             <br>
             sejak 20 februari 2025
-            
+            <br>
+            <br>
+
+            <br>
+            <a href="">AI model </a>
         </p>
         <h4>
             <a href="{{ url_for('dashboard') }}" rel="noopener noreferrer">Kembali ke Dashboard Menu
 
             </a>
         </h4>
-        
+
+    </div>
+    <div>
+        <div class="grid-container">
+            <div class="card">
+                <div class="title">Programming</div>
+                <div class="icon"><i class="fa-thin fa-laptop-code"></i></div>
+                <div class="content">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel, voluptatum. Magni hic, voluptate
+                        debitis esse corporis dolor laudantium quae quo!</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="title">Security</div>
+                <div class="icon"><i class="fa-thin fa-shield-check"></i></div>
+                <div class="content">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel, voluptatum. Magni hic, voluptate
+                        debitis esse corporis dolor laudantium quae quo!</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="title">Maintenance</div>
+                <div class="icon"><i class="fa-thin fa-wrench-simple"></i></div>
+                <div class="content">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel, voluptatum. Magni hic, voluptate
+                        debitis esse corporis dolor laudantium quae quo!</p>
+                </div>
+            </div>
+        </div>
     </div>
     {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <script>
-          alert("{{ messages[0] }}");
-        </script>
-      {% endif %}
+    {% if messages %}
+    <script>
+        alert("{{ messages[0] }}");
+    </script>
+    {% endif %}
     {% endwith %}
 
 </body>
-</html>
 
+</html>
