@@ -13,7 +13,7 @@
             padding: 0;
             height: 100vh;
             font-family: 'Raleway', sans-serif;
-            //display: flex;
+            display: flex;
             align-items: center;
             justify-content: center;
             background: linear-gradient(to right, #ff69b4, #ff00ff);
@@ -165,14 +165,7 @@
             <br>
             <a href="">AI model </a>
         </p>
-        <h4>
-            <a href="{{ url_for('dashboard') }}" rel="noopener noreferrer">Kembali ke Dashboard Menu
 
-            </a>
-        </h4>
-
-    </div>
-    <div>
         <div class="grid-container">
             <div class="card">
                 <div class="title">Programming</div>
@@ -201,6 +194,15 @@
                 </div>
             </div>
         </div>
+        <h4>
+            <a href="{{ url_for('dashboard') }}" rel="noopener noreferrer">Kembali ke Dashboard Menu
+
+            </a>
+        </h4>
+
+    </div>
+    <div>
+        
     </div>
     {% with messages = get_flashed_messages() %}
     {% if messages %}
