@@ -117,6 +117,9 @@ def home():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    
+    ua = request.headers.get('User-Agent', '').lower()
+    disp = ''
     if request.method == 'POST':
         username = request.form['username']
         pw = request.form['pw']
@@ -128,23 +131,63 @@ def register():
         cur = conn.cursor()
         try:
             cur.execute(
+            "INSERT INTO user (username,pw,name,email,isadmin) VALUES (%s,%s,%s,%s,%s)",
+            (username, hashed, name, email, isadmin))
+            conn.commit()
+            flash('Registration successful. Please log in.', 'success')
+        except Exception as e:
+            flash(f'Registration failed: {e}', 'danger')
+        if 'android' in ua or"iphone" in ua or "ipad" in ua or "ipod" in ua:
+            disp = 'smartphoneregister.html'
+        # redirect to the special android login route
+            return render_template('smartphoneregister.html')
+        
+        else:
+            disp = 'login.html'
+        try:
+            cur.execute(
                 "INSERT INTO user (username,pw,name,email,isadmin) VALUES (%s,%s,%s,%s,%s)",
                 (username, hashed, name, email, isadmin))
             conn.commit()
             flash('Registration successful. Please log in.', 'success')
-            return redirect(url_for('login'))
+            if 'android' in ua or"iphone" in ua or "ipad" in ua or "ipod" in ua:
+                return render_template('smartphonelogin.html')
+            else:
+                return redirect(url_for('login'))
         except Exception as e:
             flash(f'Registration failed: {e}', 'danger')
         finally:
             cur.close()
             conn.close()
-
-    return render_template('register.html')
+        if 'android' in ua or"iphone" in ua or "ipad" in ua or "ipod" in ua:
+            disp = 'smartphoneregister.html'
+            try:
+                cur.execute(
+                "INSERT INTO user (username,pw,name,email,isadmin) VALUES (%s,%s,%s,%s,%s)",
+                (username, hashed, name, email, isadmin))
+                conn.commit()
+                flash('Registration successful. Please log in.', 'success')
+            except Exception as e:
+                flash(f'Registration failed: {e}', 'danger')
+        else:
+            disp = 'login.hmtl'
+        # redirect to the special android login route
+            return render_template('smartphoneregister.html')
+    if 'android' in ua or"iphone" in ua or "ipad" in ua or "ipod" in ua:
+        # redirect to the special android login route
+            return render_template('smartphoneregister.html')
+    else:
+        disp = 'login.html'
+    
+    return render_template(disp)
 
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
+        
+    # server-side check for Android
+       
         username = request.form['username']
         pw = request.form['pw']
 
@@ -161,7 +204,11 @@ def login():
             flash('Login successful.', 'success')
             return redirect(url_for('dashboard'))
         flash('Invalid credentials.', 'danger')
-
+    ua = request.headers.get('User-Agent', '').lower()
+    if 'android' in ua or"iphone" in ua or "ipad" in ua or "ipod" in ua:
+        # redirect to the special android login route
+        return render_template('smartphonelogin.html')
+    
     return render_template('login.html')
 
 
@@ -171,6 +218,13 @@ def dashboard():
         flash('Please log in first.', 'warning')
         return redirect(url_for('login'))
     return render_template('dashboard.html', username=session['username'])
+@app.route('/about')
+def about():
+    #if 'username' not in session:
+        #flash('Please log in first.', 'warning')
+        #return redirect(url_for('login'))
+    return render_template('about.html', username=session['username'])
+
 
 
 @app.route('/logout')
@@ -427,9 +481,11 @@ def cekpotensikangker():
     return render_template("cekpotensikangker.html", questions=questions, prediction=prediction)
 
 
-if __name__ == '__main__':
-    app.run(debug=False)
+#if __name__ == '__main__':
+    #app.run(debug=False)
 
 import os
-port = int(os.environ.get("PORT", 5000))
-app.run(host="0.0.0.0", port=port)
+#port = int(os.environ.get("PORT", 5000))
+port = 5000
+print(port)
+app.run(host="0.0.0.0", port=port,)
