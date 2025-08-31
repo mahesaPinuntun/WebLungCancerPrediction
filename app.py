@@ -472,7 +472,7 @@ def cekpotensikangker():
         'Dry Cough': "Seberapa sering Anda mengalami batuk kering?",
         'Snoring': "Apakah Anda mendengkur saat tidur?"
     }
-
+    probability = 0
     prediction = None
     if request.method == 'POST':
         input_data = [int(request.form[feature]) for feature in features]
