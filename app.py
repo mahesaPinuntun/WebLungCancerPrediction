@@ -437,7 +437,7 @@ def add_row():
 
 @app.route("/cekpotensikangker", methods=["GET", "POST"])
 def cekpotensikangker():
-    model = joblib.load("trainedmodel/cnb_tuned_1diz0q-yanginibagus.joblib")
+    model = joblib.load("trainedmodel/cnb_tuned_1diz0qyanginibagus.joblib")
     features = [
         'Age', 'Gender', 'Air Pollution', 'Alcohol use', 'Dust Allergy',
         'OccuPational Hazards', 'Genetic Risk', 'chronic Lung Disease',
