@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dr. lappie</title>
+    <title>Dr. lungpie</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,700&display=swap" rel="stylesheet">
     <style>
@@ -76,12 +76,9 @@
         <h2>selamat datang!</h2>
         <p>{{ username }}</p>
         <ul>
-            
-            <li><a href="{{ url_for('diagnose') }}">cari tahu kerusakan Laptop</a></li>
-            <li><a href="{{ url_for('cekpotensikangker') }}">cek potensi kangker paru-paru</a></li>
+            <li><a href="{{ url_for('cekpotensikangker') }}">Mulai cek potensi kangker paru-paru</a></li>
             <hr>
             <br>
-            <li><a href="{{ url_for('edit_dataset') }}">Edit Dataset</a></li>
             <li><a href="{{ url_for('logout') }}">Logout</a></li>
             <li><a href="{{ url_for('about') }}">About Dr. Lappie</a></li>
         </ul>
