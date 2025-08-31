@@ -178,29 +178,47 @@
         <br>
         <form action="{{ url_for('register') }}" method="POST">
             <div class="input-box underline">
-
-                <label for="username">Username:</label>
-
-                <input type="text" id="username" name="username" required><br><br>
+                <input type="text" id="username" placeholder="Username" 
+                name="username" required><br><br>
             </div>
+
             <div class="input-box underline">
+                <input type="password" id="pw" 
+                name="pw" placeholder="Kunci Password" required><br><br>
+            </div>
 
-                <label for="pw">Password:</label>
-                <input type="password" id="pw" name="pw" required><br><br>
-            </div>
             <div class="input-box underline">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required><br><br>
+                <input type="text" id="name" placeholder="Nama lengkap" 
+                name="name" required><br><br>
             </div>
-            <div class="input-box underline">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required><br><br>
-            </div>
-            <input type="submit" value="Register">
-            <div class="input-box button">
 
-                <button class="input-box button" type="submit" value="Register">Daftarkan Akun</button>
+            <div class="input-box underline">
+                <input type="email" id="email" 
+                name="email" placeholder="email" required><br><br>
             </div>
+
+            <div style="display:none;">
+                <label>Role:</label>
+                <!-- izin make template From Uiverse.io by xyzswas -->
+                <div name="isadmin" class="radio-group">
+                    <label class="liquid-radio">
+                        <input type="radio" name="isadmin" value="1" checked="" />
+                        <span class="radio-visual"></span>
+                        <span class="radio-label">Admin</span>
+                    </label>
+                    <label class="liquid-radio">
+                        <input type="radio" name="isadmin" value="0" checked="true" />
+                        <span class="radio-visual"></span>
+                        <span class="radio-label">User</span>
+                    </label>
+                </div>
+
+
+            </div>
+
+
+            <button class="input-box button" type="submit">Daftarkan Akun</button>
+
         </form>
         <br>
         <div>
