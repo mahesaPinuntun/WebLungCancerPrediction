@@ -477,8 +477,11 @@ def cekpotensikangker():
     if request.method == 'POST':
         input_data = [int(request.form[feature]) for feature in features]
         prediction = model.predict([input_data])[0]
+        #percentage
+        proba = model.predict_proba([input_data])[0]
+        probability = round(max(proba) * 100, 2)  # e.g., 87.56%
 
-    return render_template("cekpotensikangker.html", questions=questions, prediction=prediction)
+    return render_template("cekpotensikangker.html", questions=questions, prediction=prediction, percentage=probability)
 
 
 #if __name__ == '__main__':
