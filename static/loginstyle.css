@@ -6,7 +6,7 @@
 }
 
 body {
-  background: linear-gradient(135deg, #ff00c8, #ffffff, #888888); 
+  background: linear-gradient(135deg, #005338, #ffffff, #888888); 
   display: flex;
   justify-content: center;
   align-items: center;
@@ -46,8 +46,8 @@ a {
 
 button {
   border-radius: 20px;
-  border: 1px solid #cb018b;
-  background-color: #ff00dd;
+  border: 1px solid #008136;
+  background-color: #00d42e;
   color: #FFFFFF;
   font-size: 12px;
   font-weight: bold;
