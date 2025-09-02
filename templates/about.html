@@ -1,137 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>About Dr. lappie</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-  <link href="https://fonts.googleapis.com/css?family=Raleway:400,700&display=swap" rel="stylesheet">
-  <style>
-    @import url('https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css');
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Dr. lappie</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,700&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css');
 
-    :root {
-      --card-bg: rgba(255,255,255,0.9);
-      --accent: #6b21a8;
-    }
+        :root {
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --accent: #6b21a8;
+        }
 
-    html,body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Raleway', sans-serif;
-      background: linear-gradient(to right, #ff69b4, #ff00ff);
-      color: #333;
-      min-height: 100vh;
-    }
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Raleway', sans-serif;
+            background: linear-gradient(to right, #ff69b4, #ff00ff);
+            color: #333;
+            min-height: 100vh;
+        }
 
-    .page-wrap {
-      padding: 2rem;
-      display: flex;
-      justify-content: center;
-    }
+        .page-wrap {
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+        }
 
-    .container {
-      width: min(1100px, 95%);
-      background: var(--card-bg);
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.08);
-    }
+        .container {
+            width: min(1100px, 95%);
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+        }
 
-    h2, h4 { color: var(--accent); margin: 0 0 .5rem 0; }
-    p { color: #444; line-height: 1.5; }
+        h2,
+        h4 {
+            color: var(--accent);
+            margin: 0 0 .5rem 0;
+        }
 
-    .grid-container {
-      display:list-item;
-      gap: 1.25rem;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      align-items: start;
-    }
+        p {
+            color: #444;
+            line-height: 1.5;
+        }
 
-    .card {
-      background-image: linear-gradient(to bottom left, #e0e4e5, #f2f6f9);
-      padding: 1.5rem;
-      border-radius: 1rem;
-      box-shadow: -10px 10px 30px rgba(0,0,0,0.08);
-    }
+        .grid-container {
+            display: list-item;
+            
+            gap: 1.25rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            align-items: start;
+        }
 
-    .card .title { text-transform: uppercase; font-weight: 600; margin-bottom: .5rem; }
-    .card .content ul { padding-left: 1rem; margin: 0; }
-    .card .content li { margin-bottom: .75rem; }
+        .card {
+            margin: 5%;
+            background-image: linear-gradient(to bottom left, #e0e4e5, #f2f6f9);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            box-shadow: -10px 10px 30px rgba(0, 0, 0, 0.08);
+        }
 
-    /* image wrapper */
-    .img-row {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      align-items: flex-start;
-      margin-top: .5rem;
-    }
+        .card .title {
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: .5rem;
+        }
 
-    .img-row img {
-      max-width: 100%;
-      height: auto;
-      width: clamp(180px, 48%, 420px); /* responsive sizing */
-      border-radius: .5rem;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.12);
-      object-fit: contain;
-    }
+        .card .content ul {
+            padding-left: 1rem;
+            margin: 0;
+        }
 
-    a { color: #0b63c6; word-break: break-word; }
-    @media (max-width: 520px) {
-      .img-row img { width: 100%; }
-    }
-  </style>
+        .card .content li {
+            margin-bottom: .75rem;
+        }
+
+        /* image wrapper */
+        .img-row {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            margin-top: .5rem;
+        }
+
+        .img-row img {
+            max-width: 100%;
+            height: auto;
+            width: clamp(180px, 48%, 420px);
+            /* responsive sizing */
+            border-radius: .5rem;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+            object-fit: contain;
+        }
+
+        a {
+            color: #0b63c6;
+            word-break: break-word;
+        }
+
+        @media (max-width: 520px) {
+            .img-row img {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
+
 <body>
-  <div class="page-wrap">
-    <div class="container">
-      <div class="grid-container">
-        <div class="card">
-          <div class="title"><h4>apa itu Dr.lungpie</h4></div>
-          <div class="content">
-            <p>Dr. lungpie adalah website pendeteksi potensi kangker paru-paru menggunakan set rule AI model yang telah dilatih</p>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="title"><h4>Detail pelatihan Model</h4></div>
-          <div class="content">
-            <ul>
-              <li>Pelatihan model dilakukan menggunakan metode
-                <br><a href="https://esairina.medium.com/algoritma-naive-bayes-pemahaman-contoh-perhitungan-manual-dan-implementasi-dengan-python-dan-475091cae835">naive bayes classifier</a>
-              </li>
-              <li>Sumber dataset diambil dari <a href="https://www.kaggle.com/code/guslovesmath/lung-cancer-ml-classification">GusLovesMath (Kaggle)</a></li>
-              <li>dilatih pada tanggal 23 Mei 2025</li>
-              <li>
-                <h5>Output Terminal Hasil pelatihan</h5>
-                <div class="img-row">
-                  <!-- adjust filenames/paths to match where you put the images -->
-                  <img src="{{ url_for('static', filename='imagehasilTrain.png') }}" alt="Hasil Pelatihan">
-                  <img src="{{ url_for('static', filename='soalJawabAi.png') }}" alt="Soal Jawab AI">
+    <div class="page-wrap">
+        <div class="container">
+            <div class="grid-container">
+                <div class="card">
+                    <div class="title">
+                        <h4>apa itu Dr.lungpie</h4>
+                    </div>
+                    <div class="content">
+                        <p>Dr. lungpie adalah website pendeteksi potensi kangker paru-paru menggunakan set rule AI model
+                            yang telah dilatih</p>
+                    </div>
                 </div>
-              </li>
-            </ul>
-          </div>
-        </div>
 
-        <div class="card">
-          <div class="title"><h4>Developer</h4></div>
-          <div class="content">
-            <p><a href="https://mahesapinuntun.github.io/MahesPortofolioWeb/" target="_blank" rel="noopener noreferrer">Mahesa Putra Pinuntun</a></p>
-          </div>
-        </div>
-      </div>
+                <div class="card">
+                    <div class="title">
+                        <h4>Detail pelatihan Model</h4>
+                    </div>
+                    <div class="content">
+                        <ul>
+                            <li>Pelatihan model dilakukan menggunakan metode
+                                <br><a
+                                    href="https://esairina.medium.com/algoritma-naive-bayes-pemahaman-contoh-perhitungan-manual-dan-implementasi-dengan-python-dan-475091cae835">naive
+                                    bayes classifier</a>
+                            </li>
+                            <li>Sumber dataset diambil dari <a
+                                    href="https://www.kaggle.com/code/guslovesmath/lung-cancer-ml-classification">GusLovesMath
+                                    (Kaggle)</a></li>
+                            <li>dilatih pada tanggal 23 Mei 2025</li>
+                            <li>
+                                <h5>Output Terminal Hasil pelatihan</h5>
+                                <div class="img-row">
+                                    <!-- adjust filenames/paths to match where you put the images -->
+                                    <img src="{{ url_for('static', filename='imagehasilTrain.png') }}"
+                                        alt="Hasil Pelatihan">
+                                    <img src="{{ url_for('static', filename='soalJawabAi.png') }}" alt="Soal Jawab AI">
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
 
-      <div style="margin-top:1.25rem">
-        <h4><a href="{{ url_for('dashboard') }}">Kembali ke Dashboard Menu</a></h4>
-      </div>
+                <div class="card">
+                    <div class="title">
+                        <h4>Developer</h4>
+                    </div>
+                    <div class="content">
+                        <p><a href="https://mahesapinuntun.github.io/MahesPortofolioWeb/" target="_blank"
+                                rel="noopener noreferrer">Mahesa Putra Pinuntun</a></p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top:1.25rem">
+                <h4><a href="{{ url_for('dashboard') }}">Kembali ke Dashboard Menu</a></h4>
+            </div>
+        </div>
     </div>
-  </div>
 
-  {% with messages = get_flashed_messages() %}
+    {% with messages = get_flashed_messages() %}
     {% if messages %}
-      <script> alert("{{ messages[0] }}"); </script>
+    <script> alert("{{ messages[0] }}"); </script>
     {% endif %}
-  {% endwith %}
+    {% endwith %}
 </body>
+
 </html>
